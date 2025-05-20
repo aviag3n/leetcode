@@ -1,7 +1,7 @@
 use std::{collections::HashMap, f32::INFINITY};
 
 
-/*
+/* 
 #[derive(PartialEq, Eq, Clone, Debug)]
 struct LinkedListNode {
     data:i32,
@@ -20,12 +20,11 @@ fn gen_linked_list(data: Vec<i32>) -> LinkedListNode {
     for i in 1..data.len() {
         let lln = LinkedListNode::new(data[i]);
         previous_node.next = Some(Box::new(lln));
-  
     }
 
     return head;
 }
-*/
+ */
 
 struct Solution {} impl Solution {
     // TwoSum
@@ -63,7 +62,6 @@ struct Solution {} impl Solution {
         return result;
     }
 
-
     // Best Time to Buy and Sell Stock I
     // Passed submission : 0ms runtime
     #[allow(dead_code)]
@@ -85,94 +83,87 @@ struct Solution {} impl Solution {
 
     // Restore IP Addresses
     #[allow(dead_code)]
-    // fn ria_old(s:String) -> Vec<String> {
+    /* 
+    fn ria_old(s:String) -> Vec<String> {
 
-    //     fn ip_to_vec(s:&String) -> Vec<u8>{
-    //         let split_ip: Vec<_> = s.split("").collect();
-    //         let mut res : Vec<u8> = vec![];
-    //         for c in split_ip {
-    //             if c != "" {
-    //                 let n : u8 = c.parse().unwrap();
-    //                 res.push(n);
-    //             }
-    //         }
-    //         return res;
-    //     }
+        fn ip_to_vec(s:&String) -> Vec<u8> {
+            let split_ip: Vec<_> = s.split("").collect();
+            let mut res : Vec<u8> = vec![];
+            for c in split_ip {
+                if c != "" {
+                    let n : u8 = c.parse().unwrap();
+                    res.push(n);
+                }
+            }
+            return res;
+        }
 
-    //     let mut new_octet :bool = true;
-    //     let mut temp_ip : Vec<String> = vec![];
-    //     let mut temp_octet : String = "".to_string();
-    //     let mut result: Vec<String> = vec![];
-
-    //     let mut restored : bool = false;
-
-
-
-    //     while !restored{
-    //         let split_ip = ip_to_vec(&s);
-    //         for num in split_ip {
-
-    //             temp_octet.push(num as char);
-
-    //             let to : u32 = temp_octet.parse().unwrap();
-
-    //             if to > 255 || temp_octet.len() == 3 {
-    //                 temp_ip.push(num.to_string());
-    //             }
-
-
-                
-    //         }
-
-    //         result.push(temp_ip.join("."));
-    //     }
-    //     return result;
-    // }
-    // fn restore_ip_addresses(s: String) -> Vec<String> {
+        let mut new_octet :bool = true;
+        let mut temp_ip : Vec<String> = vec![];
+        let mut temp_octet : String = "".to_string();
+        let mut result: Vec<String> = vec![];
+        let mut restored : bool = false;
+        while !restored{
+            let split_ip = ip_to_vec(&s);
+            for num in split_ip {
+                temp_octet.push(num as char);
+                let to : u32 = temp_octet.parse().unwrap();
+                if to > 255 || temp_octet.len() == 3 {
+                    temp_ip.push(num.to_string());
+                }
+            }
+            result.push(temp_ip.join("."));
+        }
+        return result;
+    }
+    */
+    /* 
+    fn restore_ip_addresses(s: String) -> Vec<String> {
 
 
 
-    //     let mut spliced_string : Vec<String> = s.split("").map(|x| x.to_string()).collect();
-    //     let mut solution : Vec<String> = vec![];
-    //     let mut temp_ip : Vec<String> = vec![];
+        let mut spliced_string : Vec<String> = s.split("").map(|x| x.to_string()).collect();
+        let mut solution : Vec<String> = vec![];
+        let mut temp_ip : Vec<String> = vec![];
 
-    //     let string_length = spliced_string.len();
+        let string_length = spliced_string.len();
 
-    //     let mut is_valid_segment = |start:usize, end:usize| -> bool {
-    //         if spliced_string[start] == "0".to_string() && start != end {
-    //             return false
-    //         }
-    //         let num: u32 = s[start..end+1].parse().unwrap();
-    //         return 0 <= num  && num <= 255
-    //     };
+        let mut is_valid_segment = |start:usize, end:usize| -> bool {
+            if spliced_string[start] == "0".to_string() && start != end {
+                return false
+            }
+            let num: u32 = s[start..end+1].parse().unwrap();
+            return 0 <= num  && num <= 255
+        };
 
-    //     struct BackTrack<'s> { f: &'s dyn Fn(&BackTrack, usize)}
+        struct BackTrack<'s> { f: &'s dyn Fn(&BackTrack, usize)}
 
 
 
-    //     let mut depth_first_search = BackTrack {f: &|depth_first_search, index : usize | 
-    //         if index >= spliced_string.len() && temp_ip.len() == 4 {
-    //             solution.push(temp_ip.join("."));
-    //             return
-    //         } else           
-    //         if index >= string_length || temp_ip.len() >= 4 {
-    //             return
-    //         } else {
+        let mut depth_first_search = BackTrack {f: &|depth_first_search, index : usize | 
+            if index >= spliced_string.len() && temp_ip.len() == 4 {
+                solution.push(temp_ip.join("."));
+                return
+            } else           
+            if index >= string_length || temp_ip.len() >= 4 {
+                return
+            } else {
 
-    //             for i in index..(f64::min((index + 3) as f64, string_length as f64) as usize) {
-    //                 if is_valid_segment(index, i) {
-    //                     temp_ip.push(spliced_string[index..i+1].join(""));
-    //                     (depth_first_search.f)(depth_first_search, i + 1);
-    //                     temp_ip.pop();
-    //                 }
-    //             }
-    //         } 
+                for i in index..(f64::min((index + 3) as f64, string_length as f64) as usize) {
+                    if is_valid_segment(index, i) {
+                        temp_ip.push(spliced_string[index..i+1].join(""));
+                        (depth_first_search.f)(depth_first_search, i + 1);
+                        temp_ip.pop();
+                    }
+                }
+            } 
 
-    //     };
+        };
 
-    //     (depth_first_search.f)(&depth_first_search, 0);
-    //     return solution
-    // }
+        (depth_first_search.f)(&depth_first_search, 0);
+        return solution
+    }
+    */
 
     // RIA using Depth First Search (DFS) and Backtracking
     // 0ms runtime, 2.1 MB memory usage
@@ -238,20 +229,21 @@ struct Solution {} impl Solution {
 
 fn main() {
     // TwoSum
-    // let nums: Vec<i32> = vec![0,61,37,843,6,25,0,13,73,64];
-    // let target = 0;
-    // println!("hashmap : {:?}", Solution::two_sum_hash(nums.clone(), target));
-    // println!("brute   : {:?}", Solution::two_sum_brute(nums.clone(), target))
+/*     let nums: Vec<i32> = vec![0,61,37,843,6,25,0,13,73,64];
+    let target = 0;
+    println!("hashmap : {:?}", Solution::two_sum_hash(nums.clone(), target));
+    println!("brute   : {:?}", Solution::two_sum_brute(nums.clone(), target)); */
 
 
     // Best Time to Buy and Sell Stocks 1
-    // let prices: Vec<i32> = vec![7,5,1,4,6,3];
-    // let prices_0: Vec<i32> = vec![7,6,4,3,1];
-    // let prices_not_smallest: Vec<i32> = vec![2,4,1];
-    // println!("{}", Solution::bttbass1_brute(prices));
-    // println!("{}", Solution::bttbass1_brute(prices_0));
-    // println!("{}", Solution::bttbass1_brute(prices_not_smallest));
-
+    /* 
+    let prices: Vec<i32> = vec![7,5,1,4,6,3];
+    let prices_0: Vec<i32> = vec![7,6,4,3,1];
+    let prices_not_smallest: Vec<i32> = vec![2,4,1];
+    println!("{}", Solution::bttbass1_brute(prices));
+    println!("{}", Solution::bttbass1_brute(prices_0));
+    println!("{}", Solution::bttbass1_brute(prices_not_smallest));
+     */
 
     //println!("{:?}", gen_linked_list(vec![1,2]))
 
