@@ -27,7 +27,7 @@ fn gen_linked_list(data: Vec<i32>) -> LinkedListNode {
  */
 
 struct Solution {} impl Solution {
-    // TwoSum
+    // 1: TwoSum
     #[allow(dead_code)]
     fn two_sum_brute(nums: Vec<i32>, target: i32) -> Vec<i32> {
         let mut result: Vec<i32> = vec![-1,-1]; // Edge cases, also prevents panics
@@ -63,7 +63,7 @@ struct Solution {} impl Solution {
     }
 
     // Best Time to Buy and Sell Stock I
-    // Passed submission : 0ms runtime
+    // 0ms runtime
     #[allow(dead_code)]
     fn bttbass1_brute(prices: Vec<i32>) -> i32 {
         let mut lowest:f32 = INFINITY;
@@ -81,7 +81,7 @@ struct Solution {} impl Solution {
         return highest_profit;
     }
 
-    // Restore IP Addresses
+    // 93: Restore IP Addresses
     #[allow(dead_code)]
     /* 
     fn ria_old(s:String) -> Vec<String> {
@@ -216,9 +216,129 @@ struct Solution {} impl Solution {
             string_length : s.len() // leng of String
         };
         // initialising our recursive function
+        // and passing our created environment
         depth_first_search(&mut btenv, 0);
         // return the solutions inside our backtracking environemnt
         return btenv.solutions;
+    }
+
+
+    // 65 : Is valid number
+    // 0ms runtime, 2.08 MB memory
+    #[allow(dead_code)]
+    /* 
+    fn valid_number(s:String) -> bool {
+
+        let mut is_digit = |s: char| -> bool {
+            
+            match s {
+                "0" => {
+                    return true;
+                },
+                "1" => {
+                    return true;
+                },
+                "2" => {
+                    return true;
+                },
+                "3" => {
+                    return true;
+                },
+                "4" => {
+                    return true;
+                },
+                "5" => {
+                    return true;
+                },
+                "6" => {
+                    return true;
+                },
+                "7" => {
+                    return true;
+                },
+                "8" => {
+                    return true;
+                },
+                "9" => {
+                    return true;
+                },
+                _ => {
+                    return false;
+                }
+            }
+        };
+
+        let mut is_integer = |s:String| -> bool {
+            let mut valid_int : bool = true;
+
+            let split_str = s.chars();
+
+            match split_str.next() {
+                "-" => {
+                    if is_digit(split_str.next()) {
+
+                    }
+                },
+                "+" => {
+
+                },
+                _ => {
+
+                }
+            }
+
+            return valid_int;
+        }
+
+
+        return true
+    }
+ */
+
+    // 
+    fn valid_number(s:String) -> bool {
+        let mut in_exponent         : bool = false;
+        let mut passed_sign         : bool = false;
+        let mut passed_dot          : bool = false;
+        let mut last_char_digit     : bool = false;
+        let mut prev_character            = "";
+
+        let s:Vec<String> = s.chars().map(|x| x.to_string()).collect();
+        for i in 0..s.len() {
+            let character = s[i].as_str();
+            match character {
+                "-" | "+" => {
+                    if passed_sign || last_char_digit || i == s.len()-1 || prev_character == "." || (in_exponent && ( character == "+" || character == "-" ) && !(prev_character == "e" || prev_character == "E")) {
+                        return false;
+                    }
+                    passed_sign = true;
+                },
+                "1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"|"0" => {
+                    last_char_digit = true;
+                },
+                "e" | "E" => {
+                    if i == s.len()-1 || !last_char_digit || in_exponent {
+                        return false;
+                    } else {
+                        in_exponent = true;
+                        passed_sign = false;
+                        last_char_digit = false;
+                    }
+
+                },
+                "." => {
+                    if in_exponent || passed_dot || (!last_char_digit && i == s.len() -1) {
+                        return false
+                    }
+                    passed_dot = true;
+                    //last_char_digit = true;
+                },
+                _ => {return false}
+            }
+            prev_character = character;
+        }
+
+        return true
     }
 
 
@@ -249,7 +369,7 @@ fn main() {
 
 
     // Restore IP Adresses
-    let inputs : Vec<&str> = vec![
+/*     let inputs : Vec<&str> = vec![
         "25525511135",
         "0000",
         "101023",
@@ -259,8 +379,21 @@ fn main() {
     ];
     for input in inputs {
         println!("{:?}", Solution::restore_ip_addresses(input.to_string()))
-    }
+    } */
 
+
+    // Valid Number
+
+    let inputs : Vec<&str> = vec![
+        // all invalid
+"abc", "1a", "1e", "e3", "99e2.5", "--6", "-+3", "95a54e53", "4+1", "4-1","-.7e+-0435", "5+", "5-", ".-4", "092e359-2",
+        // all valid
+"2", "0089", "-0.1", "+3.14", "4.", "-.9", "2e10", "-90E3", "3e+7", "+6e-1", "53.5e93", "-123.456e789", "0", "-1E+3", "32.e-80123"
+    ];
+
+    for input in inputs {
+        println!("{} : {}", input, Solution::valid_number(input.to_string()))
+    }
 
 }
 
