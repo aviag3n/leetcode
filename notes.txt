@@ -1,0 +1,43 @@
+let inputs : Vec<&str> = vec![
+    "123",          // true
+    "12g4",         // false
+    "101.3",        // true
+    ".46",          // true
+    "5e3.4",        // false
+    "e621",         // false
+    "E35",          // false
+    "-+43",         // false
+    "-35e3-3",      // True
+    "-35e3+3"       // True
+];
+
+// Permutations
+
+let array = [1,2,3,4]
+
+n : 4
+
+n! = 4*3*2*1 = 24
+
+k = 18
+
+
+1 - [2,3,4]   // 3! = 6
+2 - [3,4,1]   // 6 permutations
+3 - [4,1,2]   // 6 permutations
+4 - [1,2,3]   // 6 
+
+1 : 
+2 - [3,4]   // 2! = 2
+3 - [4,2]   // 2
+4 - [2,3]   // 2
+
+so, dividing k by the number of permutations 
+with the head removed gives the index of the first number
+then, we needdd to remove thehead from the list
+
+
+
+
+
+

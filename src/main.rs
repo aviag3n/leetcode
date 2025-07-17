@@ -1,31 +1,6 @@
 use std::{collections::HashMap, f32::INFINITY};
 
 
-/* 
-#[derive(PartialEq, Eq, Clone, Debug)]
-struct LinkedListNode {
-    data:i32,
-    next:Option<Box<LinkedListNode>>,
-}
-
-impl LinkedListNode {
-    fn new(data:i32) -> Self {
-        LinkedListNode { data: data, next: None }
-    }
-}
-
-fn gen_linked_list(data: Vec<i32>) -> LinkedListNode {
-    let head = LinkedListNode::new(data[0]);
-    let mut previous_node : LinkedListNode = head;
-    for i in 1..data.len() {
-        let lln = LinkedListNode::new(data[i]);
-        previous_node.next = Some(Box::new(lln));
-    }
-
-    return head;
-}
- */
-
 struct Solution {} impl Solution {
     // 1: TwoSum
     #[allow(dead_code)]
@@ -62,7 +37,7 @@ struct Solution {} impl Solution {
         return result;
     }
 
-    // Best Time to Buy and Sell Stock I
+    // 121: Best Time to Buy and Sell Stock I
     // 0ms runtime
     #[allow(dead_code)]
     fn bttbass1_brute(prices: Vec<i32>) -> i32 {
@@ -342,7 +317,47 @@ struct Solution {} impl Solution {
     }
 
 
+    // 60 : Permutation Sequence
+    // 
+    #[allow(dead_code)]
+    fn get_permutation(n: i32, k: i32) -> String {
 
+        struct PermutationEnv {
+            nums : Vec<i32>    // Length of the String
+        }
+
+
+
+        let nums : Vec<i32> = (1..n+1).collect::<Vec<i32>>();
+
+        println!("nums : {:?}", nums);
+
+        let factorial = |x| -> i32 {
+            let mut result : i32 = 1;
+            for i in 1..x+1 {
+                result = result * i;
+            }
+            return result;
+        };
+
+
+        let first_digit = |penv:&mut PermutationEnv| {
+            let amount_permutations = factorial(penv.nums.len() as i32);
+            println!("perms : {}", amount_permutations);
+            let index = k/amount_permutations;
+            println!("k : {}", k);
+            println!("index : {}", index);
+            return penv.nums[index as usize];
+
+        };
+
+        let mut tempenv = PermutationEnv {
+            nums   : nums,
+        };
+        
+        // pass the result with popped head to the function again, recurse
+        return first_digit(&mut tempenv).to_string();
+    }
 
 }
 
@@ -354,7 +369,6 @@ fn main() {
     println!("hashmap : {:?}", Solution::two_sum_hash(nums.clone(), target));
     println!("brute   : {:?}", Solution::two_sum_brute(nums.clone(), target)); */
 
-
     // Best Time to Buy and Sell Stocks 1
     /* 
     let prices: Vec<i32> = vec![7,5,1,4,6,3];
@@ -364,9 +378,6 @@ fn main() {
     println!("{}", Solution::bttbass1_brute(prices_0));
     println!("{}", Solution::bttbass1_brute(prices_not_smallest));
      */
-
-    //println!("{:?}", gen_linked_list(vec![1,2]))
-
 
     // Restore IP Adresses
 /*     let inputs : Vec<&str> = vec![
@@ -383,7 +394,7 @@ fn main() {
 
 
     // Valid Number
-
+/* 
     let inputs : Vec<&str> = vec![
         // all invalid
 "abc", "1a", "1e", "e3", "99e2.5", "--6", "-+3", "95a54e53", "4+1", "4-1","-.7e+-0435", "5+", "5-", ".-4", "092e359-2",
@@ -394,6 +405,12 @@ fn main() {
     for input in inputs {
         println!("{} : {}", input, Solution::valid_number(input.to_string()))
     }
+ */
+
+
+    // Permutations
+
+    println!("{}", Solution::get_permutation(4, 7))
 
 }
 
